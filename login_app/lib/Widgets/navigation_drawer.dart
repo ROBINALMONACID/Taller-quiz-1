@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
-  final String username;
+  final String email;
   final ValueChanged<int> onItemSelected;
   final VoidCallback onLogout;
   final int currentIndex;
 
   const CustomDrawer({
     super.key,
-    required this.username,
+    required this.email,
     required this.onItemSelected,
     required this.onLogout,
     required this.currentIndex,
@@ -47,7 +47,7 @@ class CustomDrawer extends StatelessWidget {
           ), // CircleAvatar
           const SizedBox(height: 15),
           Text(
-            username,
+            email,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 18,
@@ -55,8 +55,8 @@ class CustomDrawer extends StatelessWidget {
             ), // TextStyle
           ), // Text
           Text(
-            'usuario@demo.com',
-            style: TextStyle(color: Colors.white.withValues(alpha: 0.8)), // TextStyle
+            'Sesion activa con token JWT',
+            style: TextStyle(color: Colors.white.withValues(alpha: 0.8)),
           ),
         ], // Text
       ), // Column

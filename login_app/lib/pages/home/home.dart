@@ -8,11 +8,11 @@ import '../auth/change_password.dart';
 import '../auth/login.dart';
 
 class HomeScreen extends StatefulWidget {
-  final String username;
+  final String email;
 
   const HomeScreen({
     super.key,
-    required this.username,
+    required this.email,
   });
 
   @override
@@ -30,8 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _pages = [
-      HomeContent(username: widget.username, onModuleTap: _onHomeModuleTap),
-      UserScreen(username: widget.username),
+      HomeContent(email: widget.email, onModuleTap: _onHomeModuleTap),
+      UserScreen(email: widget.email),
       const ChangePasswordScreen(),
     ];
   }
@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onMenuPressed: () => _scaffoldKey.currentState?.openDrawer(),
       ),
       drawer: CustomDrawer(
-        username: widget.username,
+        email: widget.email,
         onItemSelected: _onDrawerItemSelected,
         onLogout: _logout,
         currentIndex: _currentIndex,
@@ -149,12 +149,12 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class HomeContent extends StatelessWidget {
-  final String username;
+  final String email;
   final ValueChanged<String> onModuleTap;
 
   const HomeContent({
     super.key,
-    required this.username,
+    required this.email,
     required this.onModuleTap,
   });
 
@@ -166,7 +166,7 @@ class HomeContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Bienvenido, $username!',
+            'Bienvenido, $email!',
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),

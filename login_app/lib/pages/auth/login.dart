@@ -13,7 +13,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final AuthService _authService = AuthService.instance;
   bool _isSubmitting = false;
@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (result is String && result.trim().isNotEmpty) {
       setState(() {
-        _usernameController.text = result.trim();
+        _emailController.text = result.trim();
         _passwordController.clear();
       });
 
@@ -36,6 +36,11 @@ class _LoginScreenState extends State<LoginScreen> {
         const SnackBar(content: Text('Usuario registrado exitosamente')),
       );
     }
+  }
+
+  bool _isValidEmail(String value) {
+    final email = value.trim();
+    return RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(email);
   }
 
   Future<void> _login() async {
@@ -49,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       await _authService.login(
-        username: _usernameController.text,
+        email: _emailController.text,
         password: _passwordController.text,
       );
 
@@ -59,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
         context,
         MaterialPageRoute(
           builder: (context) => HomeScreen(
-            username: _usernameController.text.trim(),
+            email: _emailController.text.trim(),
           ),
         ),
       );
@@ -94,15 +99,18 @@ class _LoginScreenState extends State<LoginScreen> {
               Image.asset('assets/img/logos/logo.png', height: 100),
               const SizedBox(height: 20),
               TextFormField(
-                controller: _usernameController,
+                controller: _emailController,
                 decoration: const InputDecoration(
-                  labelText: 'Usuario',
-                  prefixIcon: Icon(Icons.person),
+                  labelText: 'Correo',
+                  prefixIcon: Icon(Icons.email),
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Por favor ingrese su usuario';
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Por favor ingrese su correo';
+                  }
+                  if (!_isValidEmail(value)) {
+                    return 'Ingrese un correo valido';
                   }
                   return null;
                 },

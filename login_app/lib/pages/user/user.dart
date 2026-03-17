@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import '../../Widgets/appbar.dart';
 
 class UserScreen extends StatelessWidget {
-  final String username;
+  final String email;
 
   const UserScreen({
     super.key,
-    required this.username,
+    required this.email,
   });
 
   @override
@@ -34,7 +34,7 @@ class UserScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    buildInfoRow('Usuario:', username),
+                    buildInfoRow('Correo:', email),
                     const SizedBox(height: 15),
                     const Text(
                       'Sesion activa con token JWT',

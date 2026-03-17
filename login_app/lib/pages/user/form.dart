@@ -11,7 +11,7 @@ class UserFormScreen extends StatefulWidget {
 
 class _UserFormScreenState extends State<UserFormScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
@@ -34,10 +34,15 @@ class _UserFormScreenState extends State<UserFormScreen> {
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  bool _isValidEmail(String value) {
+    final email = value.trim();
+    return RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(email);
   }
 
   Future<void> _register() async {
@@ -58,7 +63,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
 
     try {
       await AuthService.instance.registerUser(
-        username: _usernameController.text,
+        email: _emailController.text,
         password: _passwordController.text,
         statusName: _selectedStatus,
         roleName: _selectedRole,
@@ -66,7 +71,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
 
       if (!mounted) return;
 
-      Navigator.pop(context, _usernameController.text.trim());
+      Navigator.pop(context, _emailController.text.trim());
     } on AuthException catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(error.message)),
@@ -104,15 +109,18 @@ class _UserFormScreenState extends State<UserFormScreen> {
               Image.asset('assets/img/logos/logo.png', height: 100),
               const SizedBox(height: 20),
               TextFormField(
-                controller: _usernameController,
+                controller: _emailController,
                 decoration: const InputDecoration(
-                  labelText: 'Usuario',
-                  prefixIcon: Icon(Icons.person),
+                  labelText: 'Correo',
+                  prefixIcon: Icon(Icons.email),
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Por favor ingrese un usuario';
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Por favor ingrese un correo';
+                  }
+                  if (!_isValidEmail(value)) {
+                    return 'Ingrese un correo valido';
                   }
                   return null;
                 },

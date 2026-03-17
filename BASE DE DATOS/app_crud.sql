@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-03-2026 a las 02:55:15
+-- Tiempo de generación: 17-03-2026 a las 05:56:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -43,7 +43,9 @@ CREATE TABLE `api_users` (
 
 INSERT INTO `api_users` (`Api_user_id`, `Api_user`, `Api_password`, `Api_role`, `Api_status`, `Created_at`, `Updated_at`) VALUES
 (1, 'user@email.com', '$2b$10$A.RezjA04B1GcvfGDnnve.elhd56BPN.44qUtvgyVG5Jy8IkwxoFi', 'Admin', 'Active', '2026-02-16 01:22:51', NULL),
-(3, 'robin@gmail.com', '$2b$10$zWJQ4esObAMUv5fOM1cR3ODHSAeUzErocgGRcRVUQcYGwAsCDqw6m', 'Admin', 'Active', '2026-03-17 01:18:37', NULL);
+(3, 'robin@gmail.com', '$2b$10$zWJQ4esObAMUv5fOM1cR3ODHSAeUzErocgGRcRVUQcYGwAsCDqw6m', 'Admin', 'Active', '2026-03-17 01:18:37', NULL),
+(4, 'martin', '$2b$10$Sv8eYims8/Qe9rCerog9nOZXO2LJGKugnZ2Xzwny.3EuaeKDL2Pk6', 'Admin', 'Active', '2026-03-17 04:22:19', NULL),
+(5, 'martin@gmail.com', '$2b$10$rAxW4OD8C2PLPQVkPtgNM.gDM7475Spi7xluFV94xgGplp8j9YQwy', 'Admin', 'Active', '2026-03-17 04:54:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -249,7 +251,7 @@ ALTER TABLE `user_status`
 -- AUTO_INCREMENT de la tabla `api_users`
 --
 ALTER TABLE `api_users`
-  MODIFY `Api_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Api_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `modules`

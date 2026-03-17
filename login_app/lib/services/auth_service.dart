@@ -39,7 +39,7 @@ class AuthService {
   static const String _tokenKey = 'auth_token';
 
   Future<void> registerUser({
-    required String username,
+    required String email,
     required String password,
     required String statusName,
     required String roleName,
@@ -48,7 +48,8 @@ class AuthService {
     final roleId = _mapRoleId(roleName);
     final url = Uri.parse('$baseUrl/apiUser');
     final body = {
-      'user': username.trim(),
+      // En BD esto es un correo (Api_user), pero el endpoint espera el campo "user".
+      'user': email.trim(),
       'password': password,
       'status': statusId,
       'role': roleId,
@@ -66,12 +67,12 @@ class AuthService {
   }
 
   Future<String> login({
-    required String username,
+    required String email,
     required String password,
   }) async {
     final url = Uri.parse('$baseUrl/apiUserLogin');
     final body = {
-      'api_user': username.trim(),
+      'api_user': email.trim(),
       'api_password': password,
     };
 
