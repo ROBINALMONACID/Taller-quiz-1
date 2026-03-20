@@ -1,114 +1,70 @@
-🚀 Guía de instalación y ejecución del proyecto
+Guía de instalación y ejecución del proyecto
+# Taller Quiz 1
 
-Este repositorio contiene:
+Guía sencilla para descargar, configurar e iniciar el proyecto en cualquier PC.
 
-🗄️ Base de datos
+## 1. Descargar el proyecto
+- Entra a `https://github.com/ROBINALMONACID/Taller-quiz-1`, haz clic en **Code** y descarga el ZIP (o clónalo con `git clone https://github.com/ROBINALMONACID/Taller-quiz-1.git`).
+- Descomprime el ZIP o entra en la carpeta recién clonada con tu terminal/PowerShell.
 
-🔌 API (Node.js)
+## 2. Instalar dependencias
+- Abre una terminal en `back_end`:
+  ```powershell
+  cd back_end
+  npm install
+  ```
+- En otra terminal, ve a `login_app`:
+  ```powershell
+  cd login_app
+  flutter pub get
+  ```
+  (Necesitas tener instalado Flutter y un canal `stable` válido.)
 
-📱 Frontend (Flutter)
+## 3. Configurar la base de datos MySQL
+- Asegúrate de tener MySQL funcionando.
+- Crea la base de datos `app_crud` (puedes usar MySQL Workbench, phpMyAdmin o la CLI):
+  ```sql
+  CREATE DATABASE app_crud;
+  ```
+- Importa el archivo SQL incluido:
+  ```powershell
+  mysql -u root -p app_crud < "BASE DE DATOS\\app_crud.sql"
+  ```
+  Ajusta `-u`/`-p` si usas otro usuario o contraseña.
 
+## 4. Variables de entorno
+- Copia `back_end/.env.example` como `.env` y completa los valores:
+  ```
+  PORT=3000
+  DB_HOST=localhost
+  DB_USER=root
+  DB_PASSWORD=
+  DB_PORT=3306
+  DB_DIALECT=mysql
+  DB_NAME=app_crud
+  JWT_SECRET=jwt_secret_key
+  JWT_EXPIRES_IN=7d
+  NODE_ENV=development
+  ```
+- Si necesitas otro puerto o host, ajústalo aquí.
 
-Sigue estos pasos para ejecutar el proyecto correctamente en tu computador.
+## 5. Ejecutar el backend
+1. En la carpeta `back_end`:
+   ```powershell
+   npm run dev
+   ```
+   (usa `npm start` si no quieres reinicio automático.)
+2. El servidor quedará escuchando en `http://localhost:<PORT>` según tu `.env`.
 
-1. Clonar el repositorio
-2. git clone <URL_DEL_REPOSITORIO>
+## 6. Ejecutar el frontend Flutter
+1. Abre otra terminal en `login_app`:
+   ```powershell
+   flutter run
+   ```
+2. Si prefieres un dispositivo específico, usa `flutter run -d chrome` o `-d windows`.
 
-abre el proyevto en un entorno de desarrollo ( VS CODE)
-
-3. Instalar dependencias
-🔹 API
-Dirígete a la carpeta de la API e instala las dependencias: 
-
-cd back_end ---->
-npm install
-
-🔹 Frontend (Flutter)
-Dirígete a la carpeta del frontend:
-
-cd login_app ------>
-flutter pub get
-
-3. Configurar la base de datos
-Crea una base de datos en tu gestor (xampp/phpAdmin)
-
-DB_NAME=  app_crud <-------- asi la tienes que nombrar
-
-Importa el archivo .sql incluido en el repositorio
-
-⚙️ 4. Configurar variables de entorno
-
-Ve a la carpeta de la API:
-
-cd back_end
-
-Crea un archivo llamado .env he ingresa estas variables
-
-PORT=3000
-
-HOST=0.0.0.0
-
-DB_HOST=localhost
-
-DB_USER=root
-
-DB_PASSWORD=
-
-DB_PORT=3306
-
-DB_DIALECT=mysql
-
-DB_NAME=app_crud
-
-JWT_SECRET=jwt_secre
-
-JWT_EXPIRES_IN=7d
-
-NODE_ENV=development
-
-
-
-▶️ 5. Ejecutar el proyecto
-
-🔹 Ejecutar la API
-
-npm run dev
-
-
-🔹 Ejecutar el Frontend
-En otra terminal:
-
-cd front
-
-flutter run
-
-
-🧪 Opción 2 (Ejecución alternativa)
-Puedes ejecutar ambos servicios en paralelo abriendo dos terminales:
-
-Terminal 1 → API
-
-cd back_end
-
-npm run dev
-
-
-Terminal 2 → Frontend
-
-cd login_app
-
-flutter run
-
-✅ Notas importantes
-
-Asegúrate de tener instalado:
-
-Node.js
-
-Flutter
-
-Un gestor de base de datos
-
-Verifica que el archivo .env esté correctamente configurado
-
-¡Y listo! 🎉 Ahora deberías poder ejecutar el proyecto sin problemas.
+## 7. Notas finales
+- Mantén el `.env` real solo en tu máquina; no lo subas al repositorio.
+- Revisa `flutter doctor` si Flutter no detecta ningún dispositivo.
+- Si el backend no responde, confirma que MySQL está activo y la base de datos `app_crud` contiene los datos importados.
+- Puedes ejecutar backend y frontend en paralelo con dos terminales abiertas.
