@@ -1,4 +1,5 @@
-# Taller Quiz 1
+# Guía de instalación y ejecución del proyecto
+
 
 1. **Descargar el proyecto**
    - Entra a `https://github.com/ROBINALMONACID/Taller-quiz-1`, pulsa el botón verde **Code** y elige **Download ZIP**.
